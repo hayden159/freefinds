@@ -3,7 +3,7 @@
 Part (3): Installing, Debugging, Profiling, App Lifecycle Management, Logging 
  
 This part involves demonstrating your ability to do the following: 
-– Profiling your app using one or more profilers (e.g., Android Studio’s CPU, GPU, or memory profilers or Instruments for iOS); \n
+– Profiling your app using one or more profilers (e.g., Android Studio’s CPU, GPU, or memory profilers or Instruments for iOS);
 – The app lifecycle and 
 Here you must implement a simple part of your app and demonstrate using the Android log that you can force the app’s lifecycle methods (onPause(), onResume(), etc.) to be triggered. 
  
