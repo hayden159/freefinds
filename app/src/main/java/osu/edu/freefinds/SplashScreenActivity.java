@@ -194,7 +194,9 @@ public class SplashScreenActivity extends AppCompatActivity {
                     // do nothing
                 } finally {
                     // need to finish this task?
-                    startActivity(new Intent("edu.osu.freefinds.landingpage"));
+                    // TODO: find login info in sharedpreferences and go to appropriate page
+                    // TODO: (main page or login page)
+                    startActivity(new Intent("edu.osu.freefinds.login"));
                 }
             }
         };
