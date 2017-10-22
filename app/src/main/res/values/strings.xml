@@ -95,4 +95,7 @@
         "For example, position the FAB to one side of stream of a cards so the FAB won’t interfere "
         "when a user tries to pick up one of cards.\n\n"
     </string>
+    <string name="title_activity_login">LoginActivity</string>
+    <string name="facebook_app_id">1462725420472382</string>
+    <string name="fb_login_protocol_scheme">fb1462725420472382</string>
 </resources>
