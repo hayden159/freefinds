@@ -8,6 +8,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.view.MotionEvent;
 import android.view.View;
+import android.util.Log;
+
 
 /**
  * An example full-screen activity that shows and hides the system UI (i.e.
@@ -96,6 +98,7 @@ public class SplashScreenActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        Log.d(TAG, "onCreate() called");
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.activity_splash_screen);
@@ -176,6 +179,7 @@ public class SplashScreenActivity extends AppCompatActivity {
     @Override
     public void onStart() {
         super.onStart();
+        Log.d(TAG, "onCreate() called");
         // Thread for displaying the SplashScreen
         Thread splashThread = new Thread() {
             @Override
