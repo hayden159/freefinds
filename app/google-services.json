@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "729773189847",
+    "firebase_url": "https://freefinds-8b7ed.firebaseio.com",
+    "project_id": "freefinds-8b7ed",
+    "storage_bucket": "freefinds-8b7ed.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:729773189847:android:faca9ca2c00a1eec",
+        "android_client_info": {
+          "package_name": "osu.edu.freefinds"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "729773189847-olc0gor1ll2ais75ipapd64nge5v7o59.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "osu.edu.freefinds",
+            "certificate_hash": "0528e3b949a7ed9d801a07df4008c496e1254b2b"
+          }
+        },
+        {
+          "client_id": "729773189847-27df9tttad2i2mnetd4fjthnjm0vofod.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBdbAKblG19sVCoWAldC1o6jdlnyAkmohA"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "729773189847-27df9tttad2i2mnetd4fjthnjm0vofod.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
