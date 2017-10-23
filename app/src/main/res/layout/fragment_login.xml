@@ -11,4 +11,12 @@
         android:layout_marginTop="60dp"
         android:layout_marginBottom="30dp" />
 
+    <Button
+        android:id="@+id/bypass_login"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:width="50dp"
+        android:background="@color/colorAccent"
+        android:text="@string/bypass_login" />
+
 </LinearLayout>
