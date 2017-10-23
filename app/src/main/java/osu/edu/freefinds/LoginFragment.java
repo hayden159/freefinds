@@ -1,5 +1,7 @@
 package osu.edu.freefinds;
 
+import android.content.Intent;
+import android.util.Log;
 import android.view.*;
 import android.os.Bundle;
 
@@ -16,6 +18,8 @@ import com.facebook.login.widget.LoginButton;
 import com.facebook.login.LoginManager;
 
 import java.util.Arrays;
+
+import static android.app.Activity.RESULT_OK;
 
 /**
  * Created by Liz on 10/20/2017.
@@ -60,7 +64,7 @@ public class LoginFragment extends Fragment {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                // App code
+                startActivity(new Intent(getActivity(), LandingPage.class));
             }
 
             @Override
@@ -82,6 +86,13 @@ public class LoginFragment extends Fragment {
         });
 
         return view;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(resultCode==RESULT_OK) {
+            super.onActivityResult(requestCode, resultCode, data);
+            callbackManager.onActivityResult(requestCode, resultCode, data);
+        }
     }
 
 }
