@@ -2,12 +2,15 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     android:layout_width="match_parent"
     android:layout_gravity="top"
-    android:layout_marginTop="8dp">
+    android:padding="8dp">
 
     <Button
         android:id="@+id/button1"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -15,6 +18,8 @@
 
     <Button
         android:id="@+id/button2"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -22,6 +27,8 @@
 
     <Button
         android:id="@+id/button3"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -29,6 +36,8 @@
 
     <Button
         android:id="@+id/button4"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -36,6 +45,8 @@
 
     <Button
         android:id="@+id/button5"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -43,6 +54,8 @@
 
     <Button
         android:id="@+id/button6"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_weight="1"
