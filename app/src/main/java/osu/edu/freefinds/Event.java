@@ -12,9 +12,12 @@ public class Event {
     // definitely don't have all the fields yet
     private UUID mId;
     private String mTitle;
+    private String mStuff;
     private Date mDate;
     private int mUpvote;
     private int mDownvote;
+    private String mOsuLocation;
+    private Difficulty mdifficulty;
 
     public Event() {
         mId = UUID.randomUUID();
@@ -23,6 +26,30 @@ public class Event {
 
 
     // Getters and setters
+
+    public String getStuff() {
+        return mStuff;
+    }
+
+    public void setStuff(String mStuff) {
+        this.mStuff = mStuff;
+    }
+
+    public String getOsuLocation() {
+        return mOsuLocation;
+    }
+
+    public void setOsuLocation(String mOsuLocation) {
+        this.mOsuLocation = mOsuLocation;
+    }
+
+    public Difficulty getDifficulty() {
+        return mdifficulty;
+    }
+
+    public void setDifficulty(Difficulty mdifficulty) {
+        this.mdifficulty = mdifficulty;
+    }
 
     public UUID getId() {
         return mId;
