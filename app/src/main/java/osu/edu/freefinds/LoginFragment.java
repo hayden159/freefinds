@@ -9,10 +9,12 @@ import android.widget.TextView;
 
 import android.support.v4.app.Fragment;
 
+import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
 import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
+import com.facebook.Profile;
 import com.facebook.login.LoginResult;
 import com.facebook.login.widget.LoginButton;
 import com.facebook.login.LoginManager;
@@ -32,6 +34,10 @@ public class LoginFragment extends Fragment {
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        if(userLoggedIn()){
+            startActivity(new Intent(getActivity(), MainActivity.class));
+        }
+
         View view = inflater.inflate(R.layout.fragment_login, container, false);
 
         loginButton = (LoginButton) view.findViewById(R.id.login_button);
@@ -64,7 +70,7 @@ public class LoginFragment extends Fragment {
         LoginManager.getInstance().registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                startActivity(new Intent(getActivity(), LandingPage.class));
+                startActivity(new Intent(getActivity(), MainActivity.class));
             }
 
             @Override
@@ -93,6 +99,10 @@ public class LoginFragment extends Fragment {
             super.onActivityResult(requestCode, resultCode, data);
             callbackManager.onActivityResult(requestCode, resultCode, data);
         }
+    }
+
+    private boolean userLoggedIn(){
+        return (Profile.getCurrentProfile() != null && AccessToken.getCurrentAccessToken() != null);
     }
 
 }
