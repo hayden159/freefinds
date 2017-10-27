@@ -108,4 +108,5 @@
     <string name="title_activity_login">LoginActivity</string>
     <string name="facebook_app_id">1462725420472382</string>
     <string name="fb_login_protocol_scheme">fb1462725420472382</string>
+    <string name="title_activity_create_event">CreateEventActivity</string>
 </resources>
