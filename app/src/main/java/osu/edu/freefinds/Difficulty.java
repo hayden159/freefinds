@@ -5,8 +5,8 @@ package osu.edu.freefinds;
 
 public class Difficulty {
 
-    private String mDescription;
-    private int mLevel;
+    public String mDescription;
+    public int mLevel;
 
     public Difficulty(int level) {
         switch(level) {

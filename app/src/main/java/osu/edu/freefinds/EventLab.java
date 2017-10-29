@@ -31,9 +31,13 @@ public class EventLab {
     private Event generateSampleEvent() {
         Event mE1 = new Event();
         mE1.setTitle("OSU Chaarge: Find out who we are!");
-        mE1.setDate(new Date(new Date().getTime() + 86400000));
-        mE1.setStuff("Spin for water bottle, kind bar, magnet.");
-        mE1.setDifficulty(new Difficulty(1));
+        mE1.setMonth(1);
+        mE1.setDayOfMonth(12);
+        mE1.setYear(2018);
+        mE1.setHour(12);
+        mE1.setMinute(30);
+        mE1.setDescription("Spin for water bottle, kind bar, magnet.");
+        mE1.setDifficulty(1);
         mE1.setUpvote(3);
         mE1.setOsuLocation("Rpac Lower Level");
         return mE1;

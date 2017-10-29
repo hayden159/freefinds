@@ -1,6 +1,9 @@
 package osu.edu.freefinds;
 
+import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -9,8 +12,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
+import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.TimePicker;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -24,6 +30,11 @@ import com.google.firebase.database.ValueEventListener;
 
 public class CreateEventFragment extends Fragment {
     private EditText titleField;
+    private EditText locationField;
+    private EditText descriptionField;
+    private SeekBar difficultyVal;
+    private TimePicker timeField;
+    private DatePicker dateField;
     private final String TAG = "CreateEventFragment";
 
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -34,49 +45,47 @@ public class CreateEventFragment extends Fragment {
         View v = inflater.inflate(R.layout.fragment_create_event, container, false);
 
         titleField = (EditText) v.findViewById(R.id.event_name);
-        titleField.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(
-                    CharSequence s, int start, int count, int after) {
-                // This space intentionally left blank
-            }
-
-            @Override
-            public void onTextChanged(
-                    CharSequence s, int start, int before, int count) {
-                //blank
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                // This one too
-            }
-        });
+        descriptionField = (EditText) v.findViewById(R.id.event_description);
+        locationField = (EditText) v.findViewById(R.id.event_location);
+        difficultyVal = (SeekBar) v.findViewById(R.id.difficulty_val);
+        timeField = (TimePicker) v.findViewById(R.id.event_time);
+        dateField = (DatePicker) v.findViewById(R.id.event_date);
 
         Button dbButton = (Button) v.findViewById(R.id.db_button);
         dbButton.setOnClickListener(new View.OnClickListener() {
+            @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
 
+                Event myEvent = new Event();
+
                 String titleText = titleField.getText().toString();
+                String descriptionText = descriptionField.getText().toString();
+                String location = locationField.getText().toString();
+                int difficulty = difficultyVal.getProgress();
+                int hour = timeField.getHour();
+                int minute = timeField.getMinute();
+                int year = dateField.getYear();
+                int month = dateField.getMonth();
+                int dayOfMonth = dateField.getDayOfMonth();
 
-                database.child("eventName").setValue(titleText);
-            }
-        });
+                myEvent.setTitle(titleText);
+                myEvent.setDescription(descriptionText);
+                myEvent.setOsuLocation(location);
+                myEvent.setDifficulty(difficulty);
+                myEvent.setHour(hour);
+                myEvent.setMinute(minute);
+                myEvent.setYear(year);
+                myEvent.setMonth(month);
+                myEvent.setDayOfMonth(dayOfMonth);
 
-        final TextView dbShow = (TextView) v.findViewById(R.id.db_show);
+                DatabaseReference events = database.child("events");
+                DatabaseReference newEvent = events.push();
 
-        database.child("eventName").addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
-                String appTitle = dataSnapshot.getValue().toString();
-                dbShow.setText(appTitle);
-            }
+                newEvent.setValue(myEvent);
 
-            @Override
-            public void onCancelled(DatabaseError error) {
-                // Failed to read value
-                Log.e("Hey", "Failed to read app title value.", error.toException());
+                //leave create event view now that the event is created
+                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
             }
         });
 
