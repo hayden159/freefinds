@@ -22,6 +22,7 @@ public class Event {
     private int mDownvote;
     private String mOsuLocation;
     private int mDifficulty;
+    private String mImageFileName;
 
     public Event() {
         mId = UUID.randomUUID();
@@ -138,6 +139,14 @@ public class Event {
 
     public void setDownvote(int mDownvote) {
         this.mDownvote = mDownvote;
+    }
+
+    public String getImageFileName() {
+        return mImageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        mImageFileName = imageFileName;
     }
 
 }
