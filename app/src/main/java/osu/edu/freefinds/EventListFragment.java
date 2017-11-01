@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
+import android.widget.TextView;
 
 import java.util.List;
 
@@ -14,8 +15,6 @@ import java.util.List;
 /**
  * Created by stephaniesmacbook on 10/25/17.
  */
-
-// finished at implementing a Viewholder and an Adapter
 
 public class EventListFragment extends Fragment {
     private RecyclerView mEventRecyclerView;
@@ -46,8 +45,25 @@ public class EventListFragment extends Fragment {
 
 
     private class EventHolder extends RecyclerView.ViewHolder {
+        private TextView mTitleTextView;
+        private TextView mAttTextView;
+        private TextView mDateTextView;
+
+
+        private Event mEvent;
+
+        public void bind(Event event) {
+            mEvent = event;
+            mTitleTextView.setText(mEvent.getTitle());
+            mAttTextView.setText(mEvent.getDescription());
+            mDateTextView.setText(mEvent.getHour() + ":" + mEvent.getMinute());
+        }
+
         public EventHolder(LayoutInflater inflater, ViewGroup parent) {
             super(inflater.inflate(R.layout.list_item_event, parent, false));
+            mTitleTextView = (TextView) itemView.findViewById(R.id.event_title);
+            mAttTextView = (TextView) itemView.findViewById(R.id.event_attributes);
+            mDateTextView = (TextView) itemView.findViewById(R.id.time);
         }
     }
 
@@ -67,7 +83,8 @@ public class EventListFragment extends Fragment {
 
         @Override
         public void onBindViewHolder(EventHolder holder, int position) {
-
+            Event event = mEvents.get(position);
+            holder.bind(event);
         }
 
         @Override

@@ -45,6 +45,8 @@ import static android.app.Activity.RESULT_OK;
  * Created by Liz on 10/26/2017.
  */
 
+// side todo: get the id from firebase after the event is created
+
 public class CreateEventFragment extends Fragment {
     private EditText titleField;
     private EditText locationField;

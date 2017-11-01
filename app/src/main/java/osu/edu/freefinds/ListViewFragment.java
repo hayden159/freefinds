@@ -34,6 +34,7 @@ public class ListViewFragment extends Fragment implements View.OnClickListener  
 
     public void onClick(View v) {
         switch (v.getId()) {
+            // todo: handle sorting buttons
 //            case R.id.button1:
 //                // startActivity(new Intent(getActivity().getApplicationContext(), GameSessionActivity.class));
 //                break;
