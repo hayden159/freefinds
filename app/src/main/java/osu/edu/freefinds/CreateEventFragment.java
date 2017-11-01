@@ -30,6 +30,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
+import static java.lang.Integer.parseInt;
 
 /**
  * Created by Liz on 10/26/2017.
@@ -44,6 +45,8 @@ public class CreateEventFragment extends Fragment {
     private SeekBar difficultyVal;
     private TimePicker timeField;
     private DatePicker dateField;
+    private EditText durationHoursField;
+    private EditText durationMinutesField;
     private final String TAG = "CreateEventFragment";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -65,6 +68,8 @@ public class CreateEventFragment extends Fragment {
         difficultyVal = (SeekBar) v.findViewById(R.id.difficulty_val);
         timeField = (TimePicker) v.findViewById(R.id.event_time);
         dateField = (DatePicker) v.findViewById(R.id.event_date);
+        durationHoursField = (EditText) v.findViewById(R.id.event_duration_hours);
+        durationMinutesField = (EditText) v.findViewById(R.id.event_duration_minutes);
 
         Button photoButton = (Button) v.findViewById(R.id.photo_button);
         photoButton.setOnClickListener(new View.OnClickListener() {
@@ -95,6 +100,8 @@ public class CreateEventFragment extends Fragment {
                 int year = dateField.getYear();
                 int month = dateField.getMonth();
                 int dayOfMonth = dateField.getDayOfMonth();
+                int durationHours = parseInt(durationHoursField.getText().toString());
+                int durationMinutes = parseInt(durationMinutesField.getText().toString());
 
                 myEvent.setTitle(titleText);
                 myEvent.setDescription(descriptionText);
@@ -105,6 +112,8 @@ public class CreateEventFragment extends Fragment {
                 myEvent.setYear(year);
                 myEvent.setMonth(month);
                 myEvent.setDayOfMonth(dayOfMonth);
+                myEvent.setDurationHours(durationHours);
+                myEvent.setDurationMinutes(durationMinutes);
                 myEvent.setImageFileName(imageFileName);
 
                 DatabaseReference events = database.child("events");

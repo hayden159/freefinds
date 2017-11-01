@@ -75,6 +75,26 @@
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp" />
 
+        <EditText
+            android:id="@+id/event_duration_hours"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:inputType="number"
+            android:text="Duration (hours)"/>
+
+        <EditText
+            android:id="@+id/event_duration_minutes"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:inputType="number"
+            android:text="Duration (minutes)"/>
+
         <Button
             android:id="@+id/db_button"
             android:layout_width="match_parent"
