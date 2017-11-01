@@ -1,6 +1,8 @@
 package osu.edu.freefinds;
 
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.util.Log;
 
 import java.text.SimpleDateFormat;
@@ -24,7 +26,7 @@ import com.google.firebase.database.ValueEventListener;
  *
  */
 
-public class EventLab {
+public class EventLab extends Activity{
     private static EventLab sEventLab;
 
     DatabaseReference mRootRef,mEventsRef;
@@ -60,6 +62,11 @@ public class EventLab {
 
     private EventLab(Context context) {
         mEvents = new ArrayList<Event>();
+    }
+
+
+    public List<Event> getEvents() {
+
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mEventsRef = mRootRef.child("events");
 
@@ -71,6 +78,8 @@ public class EventLab {
                 Event e = dataSnapshot.getValue(Event.class);
                 e.setId(dataSnapshot.getKey());
                 mEvents.add(e);
+
+
             }
 
             @Override
@@ -89,10 +98,8 @@ public class EventLab {
             Event sample = generateSampleEvent();
             mEvents.add(sample);
         }
-    }
 
 
-    public List<Event> getEvents() {
         return mEvents;
     }
 

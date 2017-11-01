@@ -13,12 +13,14 @@
     <TextView
         android:id="@+id/sorting_blurb"
         android:layout_width="match_parent"
-        android:layout_height="30dp" />
+        android:layout_height="20dp"
+        android:layout_marginTop="20dp"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
+        android:layout_marginTop="40dp"
         android:gravity="center_horizontal">
 
 
@@ -62,13 +64,12 @@
 
 
 
-
     <fragment
         android:id="@+id/event_list"
         class="osu.edu.freefinds.EventListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="90dp"></fragment>
+        android:layout_marginTop="100dp"></fragment>
 
 
 </android.support.design.widget.CoordinatorLayout>
