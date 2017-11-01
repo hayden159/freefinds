@@ -5,7 +5,6 @@ import android.Manifest;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -13,9 +12,6 @@ import android.support.annotation.RequiresApi;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Base64;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,21 +19,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.TimePicker;
-import android.graphics.Bitmap;
-
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -57,11 +47,8 @@ public class CreateEventFragment extends Fragment {
     private final String TAG = "CreateEventFragment";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
-    private String currentPhotoPath;
-    private String titleText = "";
-    private String fileName = "";
     private Bitmap imageBitmap = null;
-    private ImageView imageView = null;
+    private String imageFileName = "";
 
 
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -99,7 +86,7 @@ public class CreateEventFragment extends Fragment {
 
                 Event myEvent = new Event();
 
-                titleText = titleField.getText().toString();
+                String titleText = titleField.getText().toString();
                 String descriptionText = descriptionField.getText().toString();
                 String location = locationField.getText().toString();
                 int difficulty = difficultyVal.getProgress();
@@ -118,6 +105,7 @@ public class CreateEventFragment extends Fragment {
                 myEvent.setYear(year);
                 myEvent.setMonth(month);
                 myEvent.setDayOfMonth(dayOfMonth);
+                myEvent.setImageFileName(imageFileName);
 
                 DatabaseReference events = database.child("events");
                 DatabaseReference newEvent = events.push();
@@ -161,9 +149,9 @@ public class CreateEventFragment extends Fragment {
             Log.d(TAG, "inside onActivityResult()");
             StorageReference storageRef = storage.getReference();
 
-            String eventTitle = titleField.getText().toString();
-            String file = eventTitle.replaceAll(" ", "_").toLowerCase() + ".uri";
+            String file = generateString(new Random(), 10);
             Log.d(TAG, "Filename " + file);
+            imageFileName = file;
 
             Bundle extras = data.getExtras();
             if(extras != null){
@@ -175,5 +163,16 @@ public class CreateEventFragment extends Fragment {
             }
 
         }
+    }
+
+    public static String generateString(Random rng, int length)
+    {
+        String characters = "abcdefghijklmnopqrstuvwxyz123456789";
+        char[] text = new char[length];
+        for (int i = 0; i < length; i++)
+        {
+            text[i] = characters.charAt(rng.nextInt(characters.length()));
+        }
+        return new String(text);
     }
 }
