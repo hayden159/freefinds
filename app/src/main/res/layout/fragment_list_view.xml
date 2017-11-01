@@ -9,47 +9,66 @@
     android:textColor="@color/colorPrimaryDark"
     tools:context="osu.edu.freefinds.LandingPage">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/app_bar"
+
+    <TextView
+        android:id="@+id/sorting_blurb"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/app_bar_height"
-        android:fitsSystemWindows="true"
-        android:background="@color/white"
-        android:textColor="@color/colorPrimaryDark">
-
-        <android.support.design.widget.CollapsingToolbarLayout
-            android:id="@+id/toolbar_layout"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:fitsSystemWindows="true"
-            android:textColor="@color/colorPrimaryDark"
-            android:theme="@style/DarkText"
-            app:contentScrim="?attr/colorPrimaryDark"
-            app:layout_scrollFlags="scroll|exitUntilCollapsed"
-            app:toolbarId="@+id/toolbar">
-
-        </android.support.design.widget.CollapsingToolbarLayout>
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="30dp" />
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/fab_margin"
-        app:layout_anchor="@id/app_bar"
-        app:layout_anchorGravity="bottom|end"
-        app:srcCompat="@android:drawable/ic_dialog_email" />
-
-
-
-    <!-- Events -->
-    <fragment class="osu.edu.freefinds.EventListFragment"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="70dp"
+        android:gravity="center_horizontal">
+
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_location"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="6dp"
+            app:srcCompat="@drawable/ic_location" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_calendar"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="6dp"
+            app:srcCompat="@drawable/ic_calendar" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_pizza"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="6dp"
+            app:srcCompat="@drawable/pizza_piece" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_difficutly"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="6dp"
+            app:srcCompat="@drawable/ic_difficulty" />
+
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/fab_check"
+            android:layout_width="56dp"
+            android:layout_height="56dp"
+            android:layout_margin="6dp"
+            app:srcCompat="@drawable/ic_seen_it" />
+
+
+    </LinearLayout>
+
+
+
+
+    <fragment
         android:id="@+id/event_list"
-        android:layout_marginTop="@dimen/app_bar_height">
-    </fragment>
+        class="osu.edu.freefinds.EventListFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="90dp"></fragment>
 
 
 </android.support.design.widget.CoordinatorLayout>

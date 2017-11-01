@@ -52,7 +52,7 @@ public class MenuFragment extends Fragment implements View.OnClickListener  {
                 startActivity(new Intent(getActivity().getApplicationContext(), CreateEventActivity.class));
                 break;
             case R.id.button2:
-                startActivity(new Intent(getActivity().getApplicationContext(), LandingPage.class));
+                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
                 break;
             case R.id.button6:
                 startActivity(new Intent(getActivity().getApplicationContext(), LoginActivity.class));

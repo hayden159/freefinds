@@ -8,9 +8,7 @@ import java.util.UUID;
  */
 
 public class Event {
-
-    // definitely don't have all the fields yet
-    private UUID mId;
+    private String mId;
     private String mTitle;
     private String mDescription;
     private int mHour;
@@ -24,11 +22,13 @@ public class Event {
     private int mDifficulty;
 
     public Event() {
-        mId = UUID.randomUUID();
+        //mId is from Firebase - can only retrieve after object is stored
+        mUpvote = 0;
+        mDownvote = 0;
     }
 
-    public Event(String title, String description, int hour, int minute, int year, int month, int dayOfMonth, String osuLocation, int difficulty){
-        this.mId = UUID.randomUUID();
+    public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, String osuLocation, int difficulty){
+        this.mId = id;
         this.mTitle = title;
         this.mDescription = description;
         this.mHour = hour;
@@ -43,10 +43,6 @@ public class Event {
     }
 
     // Getters and setters
-
-    public void setId(UUID id) {
-        mId = id;
-    }
 
     public String getDescription() {
         return mDescription;
@@ -112,14 +108,16 @@ public class Event {
         this.mDifficulty = mdifficulty;
     }
 
-    public UUID getId() {
+    public String getId() {
         return mId;
+    }
+    public void setId(String id) {
+        this.mId = id;
     }
 
     public String getTitle() {
         return mTitle;
     }
-
     public void setTitle(String mTitle) {
         this.mTitle = mTitle;
     }
