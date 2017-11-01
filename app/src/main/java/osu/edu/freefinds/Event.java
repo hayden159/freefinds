@@ -16,10 +16,13 @@ public class Event {
     private int mYear;
     private int mMonth;
     private int mDayOfMonth;
+    private int mDurationHours;
+    private int mDurationMinutes;
     private int mUpvote;
     private int mDownvote;
     private String mOsuLocation;
     private int mDifficulty;
+    private String mImageFileName;
 
     public Event() {
         //mId is from Firebase - can only retrieve after object is stored
@@ -27,7 +30,7 @@ public class Event {
         mDownvote = 0;
     }
 
-    public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, String osuLocation, int difficulty){
+    public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, int durationHours, int durationMinutes, String osuLocation, int difficulty){
         this.mId = id;
         this.mTitle = title;
         this.mDescription = description;
@@ -36,6 +39,8 @@ public class Event {
         this.mYear = year;
         this.mMonth = month;
         this.mDayOfMonth = dayOfMonth;
+        this.mDurationHours = durationHours;
+        this.mDurationMinutes = durationMinutes;
         this.mUpvote = 0;
         this.mDownvote = 0;
         this.mOsuLocation = osuLocation;
@@ -92,6 +97,22 @@ public class Event {
         mDayOfMonth = dayOfMonth;
     }
 
+    public int getDurationHours() {
+        return mDurationHours;
+    }
+
+    public void setDurationHours(int durationHours) {
+        mDurationHours = durationHours;
+    }
+
+    public int getDurationMinutes() {
+        return mDurationMinutes;
+    }
+
+    public void setDurationMinutes(int durationMinutes) {
+        mDurationMinutes = durationMinutes;
+    }
+
     public String getOsuLocation() {
         return mOsuLocation;
     }
@@ -136,6 +157,14 @@ public class Event {
 
     public void setDownvote(int mDownvote) {
         this.mDownvote = mDownvote;
+    }
+
+    public String getImageFileName() {
+        return mImageFileName;
+    }
+
+    public void setImageFileName(String imageFileName) {
+        mImageFileName = imageFileName;
     }
 
 }
