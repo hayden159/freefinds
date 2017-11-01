@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.app.Fragment;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -40,12 +41,13 @@ public class EventListFragment extends Fragment {
                 .findViewById(R.id.event_recycler_view);
         mEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+
         updateUI();
         return mView;
 
     }
 
-    private void updateUI() {
+    public void updateUI() {
           EventLab eventLab = EventLab.get(getActivity());
           mUiEvents = eventLab.getEvents();
           mAdapter = new EventAdapter(mUiEvents);

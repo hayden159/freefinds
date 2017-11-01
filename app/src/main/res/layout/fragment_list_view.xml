@@ -4,23 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     android:background="@color/white"
+    android:fitsSystemWindows="true"
     android:textColor="@color/colorPrimaryDark"
     tools:context="osu.edu.freefinds.LandingPage">
-
-
-    <TextView
-        android:id="@+id/sorting_blurb"
-        android:layout_width="match_parent"
-        android:layout_height="20dp"
-        android:layout_marginTop="20dp"/>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="70dp"
-        android:layout_marginTop="40dp"
+        android:layout_marginTop="20dp"
         android:gravity="center_horizontal">
 
 
@@ -63,13 +56,24 @@
     </LinearLayout>
 
 
-
     <fragment
         android:id="@+id/event_list"
         class="osu.edu.freefinds.EventListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="100dp"></fragment>
+        android:layout_marginTop="100dp">
 
+    </fragment>
+
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_refresh"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="16dp"
+        app:backgroundTint="@color/seablue"
+        app:layout_anchor="@+id/event_list"
+        app:layout_anchorGravity="right|bottom"
+        app:srcCompat="@drawable/ic_refresh_" />
 
 </android.support.design.widget.CoordinatorLayout>
