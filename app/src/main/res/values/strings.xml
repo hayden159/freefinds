@@ -22,4 +22,6 @@
     <string name="fb_login_protocol_scheme">fb1462725420472382</string>
     <string name="title_activity_create_event">CreateEventActivity</string>
 
+    <string name="image">Image</string>
+
 </resources>
