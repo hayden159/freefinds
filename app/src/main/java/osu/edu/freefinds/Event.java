@@ -16,8 +16,8 @@ public class Event {
     private int mYear;
     private int mMonth;
     private int mDayOfMonth;
-    private int mDurationHours;
-    private int mDurationMinutes;
+    private int mEndHour;
+    private int mEndMinute;
     private int mUpvote;
     private int mDownvote;
     private String mOsuLocation;
@@ -30,7 +30,7 @@ public class Event {
         mDownvote = 0;
     }
 
-    public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, int durationHours, int durationMinutes, String osuLocation, int difficulty){
+    public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, int endHour, int endMinute, String osuLocation, int difficulty){
         this.mId = id;
         this.mTitle = title;
         this.mDescription = description;
@@ -39,8 +39,8 @@ public class Event {
         this.mYear = year;
         this.mMonth = month;
         this.mDayOfMonth = dayOfMonth;
-        this.mDurationHours = durationHours;
-        this.mDurationMinutes = durationMinutes;
+        this.mEndHour = endHour;
+        this.mEndMinute = endMinute;
         this.mUpvote = 0;
         this.mDownvote = 0;
         this.mOsuLocation = osuLocation;
@@ -97,20 +97,20 @@ public class Event {
         mDayOfMonth = dayOfMonth;
     }
 
-    public int getDurationHours() {
-        return mDurationHours;
+    public int getEndHour() {
+        return mEndHour;
     }
 
-    public void setDurationHours(int durationHours) {
-        mDurationHours = durationHours;
+    public void setEndHour(int endHour) {
+        mEndHour = endHour;
     }
 
-    public int getDurationMinutes() {
-        return mDurationMinutes;
+    public int getEndMinute() {
+        return mEndMinute;
     }
 
-    public void setDurationMinutes(int durationMinutes) {
-        mDurationMinutes = durationMinutes;
+    public void setEndMinute(int endMinute) {
+        mEndMinute = endMinute;
     }
 
     public String getOsuLocation() {

@@ -44,9 +44,8 @@ public class CreateEventFragment extends Fragment {
     private EditText descriptionField;
     private SeekBar difficultyVal;
     private TimePicker timeField;
+    private TimePicker endTimeField;
     private DatePicker dateField;
-    private EditText durationHoursField;
-    private EditText durationMinutesField;
     private final String TAG = "CreateEventFragment";
     static final int REQUEST_IMAGE_CAPTURE = 1;
     private static final int MY_PERMISSIONS_REQUEST_CAMERA = 100;
@@ -67,9 +66,8 @@ public class CreateEventFragment extends Fragment {
         locationField = (EditText) v.findViewById(R.id.event_location);
         difficultyVal = (SeekBar) v.findViewById(R.id.difficulty_val);
         timeField = (TimePicker) v.findViewById(R.id.event_time);
+        endTimeField = (TimePicker) v.findViewById(R.id.event_end_time);
         dateField = (DatePicker) v.findViewById(R.id.event_date);
-        durationHoursField = (EditText) v.findViewById(R.id.event_duration_hours);
-        durationMinutesField = (EditText) v.findViewById(R.id.event_duration_minutes);
 
         Button photoButton = (Button) v.findViewById(R.id.photo_button);
         photoButton.setOnClickListener(new View.OnClickListener() {
@@ -97,11 +95,11 @@ public class CreateEventFragment extends Fragment {
                 int difficulty = difficultyVal.getProgress();
                 int hour = timeField.getHour();
                 int minute = timeField.getMinute();
+                int endHour = endTimeField.getHour();
+                int endMinute = endTimeField.getMinute();
                 int year = dateField.getYear();
                 int month = dateField.getMonth();
                 int dayOfMonth = dateField.getDayOfMonth();
-                int durationHours = parseInt(durationHoursField.getText().toString());
-                int durationMinutes = parseInt(durationMinutesField.getText().toString());
 
                 myEvent.setTitle(titleText);
                 myEvent.setDescription(descriptionText);
@@ -112,8 +110,8 @@ public class CreateEventFragment extends Fragment {
                 myEvent.setYear(year);
                 myEvent.setMonth(month);
                 myEvent.setDayOfMonth(dayOfMonth);
-                myEvent.setDurationHours(durationHours);
-                myEvent.setDurationMinutes(durationMinutes);
+                myEvent.setEndHour(endHour);
+                myEvent.setEndMinute(endMinute);
                 myEvent.setImageFileName(imageFileName);
 
                 DatabaseReference events = database.child("events");

@@ -12,8 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:text="Event name" />
 
         <EditText
@@ -21,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:inputType="textPersonName"
             android:text="Event description" />
 
@@ -31,15 +29,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:text="Location" />
 
         <TextView
             android:id="@+id/difficulty_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Difficulty" />
+            android:text="Difficulty"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
         <SeekBar
             android:id="@+id/difficulty_val"
@@ -57,48 +56,49 @@
             android:id="@+id/photo_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:text="Take photo" />
+
+        <TextView
+            android:id="@+id/start_time_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Start Time"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
 
         <TimePicker
             android:id="@+id/event_time"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
+            android:layout_margin="20dp" />
+
+        <TextView
+            android:id="@+id/end_time_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="End Time"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+
+        <TimePicker
+            android:id="@+id/event_end_time"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="20dp" />
 
         <DatePicker
             android:id="@+id/event_date"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
-
-        <EditText
-            android:id="@+id/event_duration_hours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:inputType="number"
-            android:text="Duration (hours)"/>
-
-        <EditText
-            android:id="@+id/event_duration_minutes"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
-            android:inputType="number"
-            android:text="Duration (minutes)"/>
+            android:layout_margin="20dp" />
 
         <Button
             android:id="@+id/db_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:text="Create" />
 

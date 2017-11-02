@@ -63,7 +63,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         }
 
         //TODO: this is for testing--remove this
-        key = "-KxtOckXMRVdy2ENkp9b";
+        key = "-KxuUvw0X4xJuEezYHMs";
 
         DatabaseReference ref = database.child("events").child(key);
 
@@ -72,7 +72,6 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         eventLocationField = (TextView) v.findViewById(R.id.event_loc);
         eventTimeField = (TextView) v.findViewById(R.id.event_time);
         eventDateField = (TextView) v.findViewById(R.id.event_date);
-        eventDurationField = (TextView) v.findViewById(R.id.event_duration);
         imageView = (ImageView) v.findViewById(R.id.event_image);
         upvoteButton = (Button) v.findViewById(R.id.event_upvote_inc);
         downvoteButton = (Button) v.findViewById(R.id.event_downvote_inc);
@@ -126,8 +125,6 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         String location = event.getOsuLocation();
         String upvote = Integer.toString(event.getUpvote());
         String downvote = Integer.toString(event.getDownvote());
-        int durationHours = event.getDurationHours();
-        int durationMinutes = event.getDurationMinutes();
         String difficulty = Integer.toString(event.getDifficulty()+1);
 
         StorageReference imageRef = storage.child("images").child(event.getImageFileName());
@@ -140,9 +137,8 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         eventDescriptionField.setText(description);
         eventLocationField.setText(location);
         eventDateField.setText(formattedDate(event.getYear(), event.getMonth(), event.getDayOfMonth()));
-        eventTimeField.setText(formattedTime(event.getHour(), event.getMinute()));
-        eventDurationField.setText("Lasts " + Integer.toString(durationHours) +
-                " hours, " + Integer.toString(durationMinutes) + " minutes");
+        eventTimeField.setText(formattedTime(event.getHour(), event.getMinute()) + " to " +
+                formattedTime(event.getEndHour(), event.getEndMinute()));
         upvoteField.setText(upvote);
         downvoteField.setText(downvote);
         difficultyField.setText("Difficulty: " + difficulty + " out of 3");
