@@ -1,5 +1,6 @@
 package osu.edu.freefinds;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
 
@@ -23,11 +24,13 @@ public class Event {
     private String mOsuLocation;
     private int mDifficulty;
     private String mImageFileName;
+    private ArrayList<Comment> mComments;
 
     public Event() {
         //mId is from Firebase - can only retrieve after object is stored
-        mUpvote = 0;
-        mDownvote = 0;
+        this.mUpvote = 0;
+        this.mDownvote = 0;
+        this.mComments = new ArrayList<>();
     }
 
     public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, int endHour, int endMinute, String osuLocation, int difficulty){
@@ -45,6 +48,7 @@ public class Event {
         this.mDownvote = 0;
         this.mOsuLocation = osuLocation;
         this.mDifficulty = difficulty;
+        this.mComments = new ArrayList<>();
     }
 
     // Getters and setters
@@ -167,4 +171,11 @@ public class Event {
         mImageFileName = imageFileName;
     }
 
+    public ArrayList<Comment> getComments() {
+        return mComments;
+    }
+
+    public void setComments(ArrayList<Comment> comments) {
+        mComments = comments;
+    }
 }
