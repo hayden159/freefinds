@@ -14,9 +14,7 @@ public class Event {
     private String mDescription;
     private int mHour;
     private int mMinute;
-    private int mYear;
-    private int mMonth;
-    private int mDayOfMonth;
+    private Date mDate;
     private int mEndHour;
     private int mEndMinute;
     private int mUpvote;
@@ -33,15 +31,13 @@ public class Event {
         this.mComments = new ArrayList<>();
     }
 
-    public Event(String id, String title, String description, int hour, int minute, int year, int month, int dayOfMonth, int endHour, int endMinute, String osuLocation, int difficulty){
+    public Event(String id, String title, String description, int hour, int minute, Date date, int endHour, int endMinute, String osuLocation, int difficulty){
         this.mId = id;
         this.mTitle = title;
         this.mDescription = description;
         this.mHour = hour;
         this.mMinute = minute;
-        this.mYear = year;
-        this.mMonth = month;
-        this.mDayOfMonth = dayOfMonth;
+        this.mDate = date;
         this.mEndHour = endHour;
         this.mEndMinute = endMinute;
         this.mUpvote = 0;
@@ -77,30 +73,6 @@ public class Event {
         mMinute = minute;
     }
 
-    public int getYear() {
-        return mYear;
-    }
-
-    public void setYear(int year) {
-        mYear = year;
-    }
-
-    public int getMonth() {
-        return mMonth;
-    }
-
-    public void setMonth(int month) {
-        mMonth = month;
-    }
-
-    public int getDayOfMonth() {
-        return mDayOfMonth;
-    }
-
-    public void setDayOfMonth(int dayOfMonth) {
-        mDayOfMonth = dayOfMonth;
-    }
-
     public int getEndHour() {
         return mEndHour;
     }
@@ -115,6 +87,14 @@ public class Event {
 
     public void setEndMinute(int endMinute) {
         mEndMinute = endMinute;
+    }
+
+    public Date getDate() {
+        return mDate;
+    }
+
+    public void setDate(Date date) {
+        mDate = date;
     }
 
     public String getOsuLocation() {

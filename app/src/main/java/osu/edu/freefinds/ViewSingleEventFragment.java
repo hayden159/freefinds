@@ -164,6 +164,12 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         String upvote = Integer.toString(event.getUpvote());
         String downvote = Integer.toString(event.getDownvote());
         String difficulty = Integer.toString(event.getDifficulty()+1);
+        Date date = event.getDate(); // your date
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(date);
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int day = cal.get(Calendar.DAY_OF_MONTH);
 
         StorageReference imageRef = storage.child("images").child(event.getImageFileName());
         Glide.with(this /* context */)
@@ -174,7 +180,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         eventTitleField.setText(title);
         eventDescriptionField.setText(description);
         eventLocationField.setText(location);
-        eventDateField.setText(formattedDate(event.getYear(), event.getMonth(), event.getDayOfMonth()));
+        eventDateField.setText(formattedDate(year, month, day));
         eventTimeField.setText(formattedTime(event.getHour(), event.getMinute()) + " to " +
                 formattedTime(event.getEndHour(), event.getEndMinute()));
         upvoteField.setText(upvote);

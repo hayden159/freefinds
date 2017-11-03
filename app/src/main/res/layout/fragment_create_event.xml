@@ -59,39 +59,32 @@
             android:layout_margin="20dp"
             android:text="Take photo" />
 
-        <TextView
-            android:id="@+id/start_time_label"
+        <Button
+            android:id="@+id/start_time_picker_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Start Time"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Select time event starts" />
 
-        <TimePicker
-            android:id="@+id/event_time"
+        <Button
+            android:id="@+id/end_time_picker_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Select time event ends" />
 
-        <TextView
-            android:id="@+id/end_time_label"
+        <Button
+            android:id="@+id/date_picker_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="End Time"
-            android:gravity="center"
-            android:textAppearance="@style/TextAppearance.AppCompat.Display1" />
-
-        <TimePicker
-            android:id="@+id/event_end_time"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
-
-        <DatePicker
-            android:id="@+id/event_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="20dp" />
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Select Date" />
 
         <Button
             android:id="@+id/db_button"
