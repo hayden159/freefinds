@@ -198,6 +198,8 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
 
         if(minutesNum==0){
             minutes = "00";
+        }else if(minutesNum<10) {
+            minutes = "0" + Integer.toString(minutesNum);
         }else{
             minutes = Integer.toString(minutesNum);
         }

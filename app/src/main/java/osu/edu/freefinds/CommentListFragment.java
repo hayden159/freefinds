@@ -57,7 +57,7 @@ public class CommentListFragment extends Fragment {
         public void bind(Comment comment) {
             mComment = comment;
             mContentTextView.setText(mComment.getContent());
-            mTimeTextView.setText(mComment.getHourPosted() + ":" + mComment.getMinutePosted());
+            mTimeTextView.setText(formattedTime(mComment.getHourPosted(), mComment.getMinutePosted()));
         }
 
         public CommentHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -91,6 +91,31 @@ public class CommentListFragment extends Fragment {
         public int getItemCount() {
             return mComments.size();
         }
+    }
+
+    private String formattedTime(int hoursNum, int minutesNum){
+        String hours;
+        String minutes;
+        String ampm = "am";
+
+        if(hoursNum>12){
+            hours = Integer.toString(hoursNum-12);
+            ampm = "pm";
+        }else if(hoursNum==0){
+            hours = "12";
+        }else{
+            hours = Integer.toString(hoursNum);
+        }
+
+        if(minutesNum==0){
+            minutes = "00";
+        }else if(minutesNum<10) {
+            minutes = "0" + Integer.toString(minutesNum);
+        }else{
+            minutes = Integer.toString(minutesNum);
+        }
+
+        return hours + ":" + minutes + " " + ampm;
     }
 
 }
