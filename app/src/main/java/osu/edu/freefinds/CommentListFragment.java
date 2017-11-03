@@ -38,7 +38,7 @@ public class CommentListFragment extends Fragment {
     private void updateUI() {
         //String key = Integer.toString(getActivity().getIntent().getExtras().getInt("key"));
         //TODO: for testing.. remove later
-        String key = "-KxzGLxEFEHVjJu7FLek";
+        String key = "-Ky35-pkgBWpj7uHcUdi";
         CommentLab commentLab = CommentLab.get(getActivity(), key);
         List<Comment> comments = commentLab.getComments();
         mAdapter = new CommentAdapter(comments);

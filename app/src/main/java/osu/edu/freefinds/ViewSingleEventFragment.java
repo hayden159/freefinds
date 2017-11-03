@@ -70,7 +70,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         }
 
         //TODO: this is for testing--remove this
-        key = "-KxzGLxEFEHVjJu7FLek";
+        key = "-Ky35-pkgBWpj7uHcUdi";
 
         DatabaseReference ref = database.child("events").child(key);
 

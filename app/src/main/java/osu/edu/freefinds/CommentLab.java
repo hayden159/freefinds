@@ -72,10 +72,6 @@ public class CommentLab {
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-        if (mComments.size()==0) {
-            Comment sample = generateSampleComment();
-            mComments.add(sample);
-        }
     }
 
 
