@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CalendarView;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
@@ -24,7 +25,10 @@ import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.TimeZone;
 
 
@@ -50,6 +54,9 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
     TextView upvoteField;
     TextView downvoteField;
     TextView difficultyField;
+    EditText addComment;
+    Button commentButton;
+    TextView commentLabel;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -78,6 +85,9 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         upvoteField = (TextView) v.findViewById(R.id.upvote_show);
         downvoteField = (TextView) v.findViewById(R.id.downvote_show);
         difficultyField = (TextView) v.findViewById(R.id.event_difficulty);
+        addComment = (EditText) v.findViewById(R.id.comment);
+        commentButton = (Button) v.findViewById(R.id.add_comment);
+        commentLabel = (TextView) v.findViewById(R.id.comment_label);
 
         database.child("events").child(key).addListenerForSingleValueEvent(new ValueEventListener() {
                @Override
@@ -113,6 +123,34 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
                 database.child("events").child(key).child("downvote").setValue(event.getDownvote());
                 upvoteButton.setEnabled(false);
                 downvoteButton.setEnabled(false);
+            }
+        });
+
+        commentButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view) {
+                String commentText = addComment.getText().toString();
+                Comment newComment = new Comment();
+                newComment.setContent(commentText);
+
+                Date date = new Date();   // given date
+                Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+                calendar.setTime(date);   // assigns calendar to given date
+                int hour = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+                int minute = calendar.get(Calendar.MINUTE);
+
+                newComment.setHourPosted(hour);
+                newComment.setMinutePosted(minute);
+
+                ArrayList<Comment> comments = event.getComments();
+                comments.add(newComment);
+                event.setComments(comments);
+
+                database.child("events").child(key).child("comments").setValue(event.getComments());
+
+                addComment.setVisibility(View.INVISIBLE);
+                commentButton.setVisibility(View.INVISIBLE);
+                commentLabel.setVisibility(View.INVISIBLE);
             }
         });
 
