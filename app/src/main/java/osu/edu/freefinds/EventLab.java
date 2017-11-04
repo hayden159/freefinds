@@ -8,6 +8,7 @@ import android.util.Log;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 import java.util.UUID;
 import java.util.Date;
@@ -48,9 +49,10 @@ public class EventLab extends Activity{
     private Event generateSampleEvent() {
         Event mE1 = new Event();
         mE1.setTitle("Free Finds Sample Event");
-        mE1.setMonth(1);
-        mE1.setDayOfMonth(12);
-        mE1.setYear(2018);
+        Calendar cal = Calendar.getInstance();
+        cal.set(2018, 1, 12);
+        Date date = cal.getTime();
+        mE1.setDate(date);
         mE1.setHour(12);
         mE1.setMinute(30);
         mE1.setDescription("Spin for water bottle, kind bar, magnet.");

@@ -12,8 +12,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:text="Event name" />
 
         <EditText
@@ -21,8 +20,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:inputType="textPersonName"
             android:text="Event description" />
 
@@ -31,15 +29,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:ems="10"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:text="Location" />
 
         <TextView
             android:id="@+id/difficulty_label"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Difficulty" />
+            android:text="Difficulty"
+            android:gravity="center"
+            android:textAppearance="@style/TextAppearance.AppCompat.Display1"/>
 
         <SeekBar
             android:id="@+id/difficulty_val"
@@ -57,48 +56,42 @@
             android:id="@+id/photo_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_margin="20dp"
             android:text="Take photo" />
 
-        <TimePicker
-            android:id="@+id/event_time"
+        <Button
+            android:id="@+id/start_time_picker_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
-
-        <DatePicker
-            android:id="@+id/event_date"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp" />
-
-        <EditText
-            android:id="@+id/event_duration_hours"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:inputType="number"
-            android:text="Duration (hours)"/>
+            android:text="Select time event starts" />
 
-        <EditText
-            android:id="@+id/event_duration_minutes"
+        <Button
+            android:id="@+id/end_time_picker_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:ems="10"
-            android:layout_marginTop="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
-            android:inputType="number"
-            android:text="Duration (minutes)"/>
+            android:text="Select time event ends" />
+
+        <Button
+            android:id="@+id/date_picker_button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            android:text="Select Date" />
 
         <Button
             android:id="@+id/db_button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
             android:layout_marginBottom="20dp"
             android:text="Create" />
 
