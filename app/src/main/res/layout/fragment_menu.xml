@@ -48,4 +48,13 @@
         android:layout_weight="1"
         android:text="@string/menu6" />
 
+    <Button
+        android:id="@+id/button7"
+        android:background="@color/colorPrimaryDark"
+        android:layout_margin="8dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="@string/menu7" />
+
 </LinearLayout>

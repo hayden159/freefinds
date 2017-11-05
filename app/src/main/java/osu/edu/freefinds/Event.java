@@ -23,6 +23,7 @@ public class Event {
     private Integer mDifficulty;
     private String mImageFileName;
     private ArrayList<Comment> mComments;
+    private String user;
 
     public Event() {
         //mId is from Firebase - can only retrieve after object is stored
@@ -158,6 +159,15 @@ public class Event {
 
     public void setComments(ArrayList<Comment> comments) {
         mComments = comments;
+    }
+
+<
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 
 }

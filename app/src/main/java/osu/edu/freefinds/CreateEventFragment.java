@@ -2,6 +2,7 @@ package osu.edu.freefinds;
 
 import android.*;
 import android.Manifest;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -22,6 +23,10 @@ import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.SeekBar;
 import android.widget.TimePicker;
+import android.widget.Toast;
+
+import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -32,6 +37,8 @@ import java.util.Date;
 import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
+import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.facebook.Profile.getCurrentProfile;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -124,24 +131,37 @@ public class CreateEventFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                String titleText = titleField.getText().toString();
-                String descriptionText = descriptionField.getText().toString();
-                String location = locationField.getText().toString();
-                int difficulty = difficultyVal.getProgress();
+                if(isLoggedIn()) {
+                    String titleText = titleField.getText().toString();
+                    String descriptionText = descriptionField.getText().toString();
+                    String location = locationField.getText().toString();
+                    int difficulty = difficultyVal.getProgress();
 
-                myEvent.setTitle(titleText);
-                myEvent.setDescription(descriptionText);
-                myEvent.setOsuLocation(location);
-                myEvent.setDifficulty(difficulty);
-                myEvent.setImageFileName(imageFileName);
+                    Profile currentUser = getCurrentProfile();
+                    String userName = currentUser.getFirstName();
 
-                DatabaseReference events = database.child("events");
-                DatabaseReference newEvent = events.push();
+                    myEvent.setTitle(titleText);
+                    myEvent.setDescription(descriptionText);
+                    myEvent.setOsuLocation(location);
+                    myEvent.setDifficulty(difficulty);
+                    myEvent.setImageFileName(imageFileName);
+                    myEvent.setUser(userName);
 
-                newEvent.setValue(myEvent);
+                    DatabaseReference events = database.child("events");
+                    DatabaseReference newEvent = events.push();
 
-                //leave create event view now that the event is created
-                startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                    newEvent.setValue(myEvent);
+
+                    //leave create event view now that the event is created
+                    startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
+                }else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "Must be logged in to create an event.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
         });
 
@@ -220,5 +240,10 @@ public class CreateEventFragment extends Fragment {
             text[i] = characters.charAt(rng.nextInt(characters.length()));
         }
         return new String(text);
+    }
+
+    public boolean isLoggedIn() {
+        AccessToken accessToken = AccessToken.getCurrentAccessToken();
+        return accessToken != null;
     }
 }

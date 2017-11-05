@@ -43,11 +43,11 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
     private StorageReference storage = FirebaseStorage.getInstance().getReference();
     String key;
     TextView eventTitleField;
+    TextView eventCreatorField;
     TextView eventDescriptionField;
     TextView eventLocationField;
     TextView eventTimeField;
     TextView eventDateField;
-    TextView eventDurationField;
     ImageView imageView;
     Button upvoteButton;
     Button downvoteButton;
@@ -71,9 +71,11 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
 
         key = getActivity().getIntent().getStringExtra("single_event_id");
 
+
         DatabaseReference ref = database.child("events").child(key);
 
         eventTitleField = (TextView) v.findViewById(R.id.event_title);
+        eventCreatorField = (TextView) v.findViewById(R.id.event_creator);
         eventDescriptionField = (TextView) v.findViewById(R.id.event_description);
         eventLocationField = (TextView) v.findViewById(R.id.event_loc);
         eventTimeField = (TextView) v.findViewById(R.id.event_time);
@@ -158,6 +160,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
 
     private void populateView(Event event){
         String title = event.getTitle();
+        String creator = event.getUser();
         String description = event.getDescription();
         String location = event.getOsuLocation();
         String upvote = Integer.toString(event.getUpvote());
@@ -177,6 +180,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
 //                .into(imageView );
 
         eventTitleField.setText(title);
+        eventCreatorField.setText("Event reporter: " + creator);
         eventDescriptionField.setText(description);
         eventLocationField.setText(location);
         eventDateField.setText(formattedDate(year, month, day));
