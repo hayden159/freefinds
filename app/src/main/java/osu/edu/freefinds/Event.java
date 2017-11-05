@@ -160,8 +160,7 @@ public class Event {
     public void setComments(ArrayList<Comment> comments) {
         mComments = comments;
     }
-
-<
+    
     public String getUser() {
         return user;
     }
