@@ -11,6 +11,7 @@
     <string name="menu4">My Events</string>
     <string name="menu5">Preferences</string>
     <string name="menu6">Login</string>
+    <string name="menu7">Log Out</string>
 
     <string name="title_activity_splash_screen">SplashScreenActivity</string>
     <string name="dummy_button">Dummy Button</string>
