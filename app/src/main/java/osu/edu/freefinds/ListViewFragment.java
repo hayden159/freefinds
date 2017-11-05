@@ -71,6 +71,9 @@ public class ListViewFragment extends Fragment implements View.OnClickListener  
                 Log.d(TAG, "difficulty button pressed");
                 initiatePopupWindow(v, new Difficulty());
                 break;
+            case R.id.fab_check:
+                Log.d(TAG, "upvote button pressed");
+                // initiatePopupWindow(v, new Upvote());
 
         }
     }

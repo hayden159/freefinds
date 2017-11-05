@@ -16,6 +16,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -91,7 +93,7 @@ public class EventListFragment extends Fragment {
             mEvent = event;
             mTitleTextView.setText(mEvent.getTitle());
             mAttTextView.setText(mEvent.getDescription());
-            mUpvoteView.setText(mEvent.getUpvote());
+            mUpvoteView.setText(String.valueOf(mEvent.getUpvote()));
 
             // format time
             Date date = event.getDate(); // your date
@@ -113,6 +115,7 @@ public class EventListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.event_title);
             mAttTextView = (TextView) itemView.findViewById(R.id.event_attributes);
             mDateTextView = (TextView) itemView.findViewById(R.id.time);
+            mUpvoteView = (TextView) itemView.findViewById(R.id.upvote_count);
 
         }
 
