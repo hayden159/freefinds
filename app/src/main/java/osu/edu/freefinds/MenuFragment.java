@@ -39,12 +39,8 @@ public class MenuFragment extends Fragment implements View.OnClickListener  {
         createEvent.setOnClickListener(this);
         Button eventList = (Button) v.findViewById(R.id.button2);
         eventList.setOnClickListener(this);
-        Button eventMap = (Button) v.findViewById(R.id.button3);
-        eventMap.setOnClickListener(this);
         Button myEvents = (Button) v.findViewById(R.id.button4);
         myEvents.setOnClickListener(this);
-        Button preferences = (Button) v.findViewById(R.id.button5);
-        preferences.setOnClickListener(this);
         Button login = (Button) v.findViewById(R.id.button6);
         login.setOnClickListener(this);
         Button logout = (Button) v.findViewById(R.id.button7);

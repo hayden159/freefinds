@@ -20,7 +20,7 @@ public class Event {
     private int mUpvote;
     private int mDownvote;
     private String mOsuLocation;
-    private int mDifficulty;
+    private Integer mDifficulty;
     private String mImageFileName;
     private ArrayList<Comment> mComments;
     private String user;
@@ -32,7 +32,8 @@ public class Event {
         this.mComments = new ArrayList<>();
     }
 
-    public Event(String id, String title, String description, int hour, int minute, Date date, int endHour, int endMinute, String osuLocation, int difficulty){
+
+    public Event(String id, String title, String description, int hour, int minute, Date date, int endHour, int endMinute, String osuLocation, Integer difficulty){
         this.mId = id;
         this.mTitle = title;
         this.mDescription = description;
@@ -106,11 +107,11 @@ public class Event {
         this.mOsuLocation = mOsuLocation;
     }
 
-    public int getDifficulty() {
+    public Integer getDifficulty() {
         return mDifficulty;
     }
 
-    public void setDifficulty(int mdifficulty) {
+    public void setDifficulty(Integer mdifficulty) {
         this.mDifficulty = mdifficulty;
     }
 

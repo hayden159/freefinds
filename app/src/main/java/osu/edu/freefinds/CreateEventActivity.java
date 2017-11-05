@@ -1,11 +1,37 @@
 package osu.edu.freefinds;
 
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 
 public class CreateEventActivity extends AppCompatActivity {
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.top_bar, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            // action with ID action_settings was selected
+            case R.id.action_menu:
+                Intent menuIntent = new Intent("edu.osu.freefinds.menuActivity");
+                startActivity(menuIntent);
+                break;
+            default:
+                break;
+        }
+
+        return true;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

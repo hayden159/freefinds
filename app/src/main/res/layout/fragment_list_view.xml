@@ -11,18 +11,14 @@
 
 
     <LinearLayout
+        android:id="@+id/sorting_buttons"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="50dp"
         android:layout_marginTop="20dp"
-        android:gravity="center_horizontal">
-
-
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_location"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="6dp"
-            app:srcCompat="@drawable/ic_location" />
+        android:gravity="left|center_horizontal"
+        tools:layout_editor_absoluteY="25dp">
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_calendar"
@@ -31,12 +27,6 @@
             android:layout_margin="6dp"
             app:srcCompat="@drawable/ic_calendar" />
 
-        <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_pizza"
-            android:layout_width="56dp"
-            android:layout_height="56dp"
-            android:layout_margin="6dp"
-            app:srcCompat="@drawable/pizza_piece" />
 
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab_difficutly"
@@ -55,6 +45,18 @@
 
     </LinearLayout>
 
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/fab_refresh"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_margin="6dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginRight="20dp"
+        app:backgroundTint="@color/seablue"
+        app:layout_anchor="@+id/sorting_buttons"
+        app:layout_anchorGravity="right|center"
+        app:srcCompat="@drawable/ic_refresh_" />
+
 
     <fragment
         android:id="@+id/event_list"
@@ -66,14 +68,6 @@
     </fragment>
 
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab_refresh"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
-        android:layout_margin="16dp"
-        app:backgroundTint="@color/seablue"
-        app:layout_anchor="@+id/event_list"
-        app:layout_anchorGravity="right|bottom"
-        app:srcCompat="@drawable/ic_refresh_" />
+
 
 </android.support.design.widget.CoordinatorLayout>

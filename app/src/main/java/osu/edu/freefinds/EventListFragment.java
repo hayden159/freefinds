@@ -16,6 +16,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import org.w3c.dom.Text;
+
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 
@@ -54,12 +58,20 @@ public class EventListFragment extends Fragment {
           mEventRecyclerView.setAdapter(mAdapter);
     }
 
+    public void filterEvents(Event hasFilteringSet) {
+        EventLab eventLab = EventLab.get(getActivity());
+        mUiEvents = eventLab.getEventsFiltered(hasFilteringSet);
+        mAdapter = new EventAdapter(mUiEvents);
+        mEventRecyclerView.setAdapter(mAdapter);
+    }
+
 
 
     private class EventHolder extends RecyclerView.ViewHolder  implements View.OnClickListener  {
         private TextView mTitleTextView;
         private TextView mAttTextView;
         private TextView mDateTextView;
+        private TextView mUpvoteView;
 
 
         private Event mEvent;
@@ -71,13 +83,29 @@ public class EventListFragment extends Fragment {
             Toast.makeText(getActivity(),
                     mEvent.getTitle() + " clicked!", Toast.LENGTH_SHORT)
                     .show();
+            Intent intent = new Intent(getActivity().getBaseContext(), ViewSingleEventActivity.class);
+            intent.putExtra("single_event_id", mEvent.getId());
+            startActivity(intent);
+
         }
 
         public void bind(Event event) {
             mEvent = event;
             mTitleTextView.setText(mEvent.getTitle());
             mAttTextView.setText(mEvent.getDescription());
-            mDateTextView.setText(mEvent.getHour() + ":" + mEvent.getMinute());
+            mUpvoteView.setText(String.valueOf(mEvent.getUpvote()));
+
+            // format time
+            Date date = event.getDate(); // your date
+            Calendar cal = Calendar.getInstance();
+            cal.setTime(date);
+            int year = cal.get(Calendar.YEAR);
+            int month = cal.get(Calendar.MONTH);
+            int day = cal.get(Calendar.DAY_OF_MONTH);
+            String fDate = formattedDate(month, day);
+            String fTime = formattedTime(event.getHour(), event.getEndMinute());
+
+            mDateTextView.setText(fTime + "\n" + fDate);
         }
 
         public EventHolder(LayoutInflater inflater, ViewGroup parent) {
@@ -87,6 +115,7 @@ public class EventListFragment extends Fragment {
             mTitleTextView = (TextView) itemView.findViewById(R.id.event_title);
             mAttTextView = (TextView) itemView.findViewById(R.id.event_attributes);
             mDateTextView = (TextView) itemView.findViewById(R.id.time);
+            mUpvoteView = (TextView) itemView.findViewById(R.id.upvote_count);
 
         }
 
@@ -116,6 +145,75 @@ public class EventListFragment extends Fragment {
         public int getItemCount() {
             return mEvents.size();
         }
+    }
+
+    private String formattedTime(int hoursNum, int minutesNum){
+        String hours;
+        String minutes;
+        String ampm = "am";
+
+        if(hoursNum>12){
+            hours = Integer.toString(hoursNum-12);
+            ampm = "pm";
+        }else if(hoursNum==0){
+            hours = "12";
+        }else{
+            hours = Integer.toString(hoursNum);
+        }
+
+        if(minutesNum==0){
+            minutes = "00";
+        }else if(minutesNum<10) {
+            minutes = "0" + Integer.toString(minutesNum);
+        }else{
+            minutes = Integer.toString(minutesNum);
+        }
+
+        return hours + ":" + minutes + " " + ampm;
+    }
+
+    private String formattedDate(int monthNum, int dayOfMonthNum){
+        String month = "";
+        switch (monthNum) {
+            case 1:
+                month = "January";
+                break;
+            case 2:
+                month = "February";
+                break;
+            case 3:
+                month = "March";
+                break;
+            case 4:
+                month = "April";
+                break;
+            case 5:
+                month = "May";
+                break;
+            case 6:
+                month = "June";
+                break;
+            case 7:
+                month = "July";
+                break;
+            case 8:
+                month = "August";
+                break;
+            case 9:
+                month = "September";
+                break;
+            case 10:
+                month = "October";
+                break;
+            case 11:
+                month = "November";
+                break;
+            case 12:
+                month = "December";
+                break;
+        }
+
+        return month + " " + Integer.toString(dayOfMonthNum);
     }
 
 
