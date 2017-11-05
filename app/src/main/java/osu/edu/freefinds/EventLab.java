@@ -9,6 +9,8 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.UUID;
 import java.util.Date;
@@ -46,21 +48,6 @@ public class EventLab extends Activity{
         return sEventLab;
     }
 
-    private Event generateSampleEvent() {
-        Event mE1 = new Event();
-        mE1.setTitle("Free Finds Sample Event");
-        Calendar cal = Calendar.getInstance();
-        cal.set(2018, 1, 12);
-        Date date = cal.getTime();
-        mE1.setDate(date);
-        mE1.setHour(12);
-        mE1.setMinute(30);
-        mE1.setDescription("Spin for water bottle, kind bar, magnet.");
-        mE1.setDifficulty(1);
-        mE1.setUpvote(3);
-        mE1.setOsuLocation("Rpac Lower Level");
-        return mE1;
-    }
 
     private EventLab(Context context) {
         mEvents = new ArrayList<Event>();
@@ -75,11 +62,21 @@ public class EventLab extends Activity{
         mEventsRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                Log.d(TAG, "Adding child " + dataSnapshot.child("title").getValue());
-                Log.d(TAG, "id from firebase is " + dataSnapshot.getKey());
                 Event e = dataSnapshot.getValue(Event.class);
                 e.setId(dataSnapshot.getKey());
-                mEvents.add(e);
+                boolean found = false;
+                for (Event existingE : mEvents) {
+                    if (existingE.getId().equals(e.getId())) {
+                        found = true;
+                        break;
+                    }
+                }
+
+                if(!found) {
+                    mEvents.add(e);
+                    Log.d(TAG, "Adding child " + dataSnapshot.child("title").getValue());
+                    Log.d(TAG, "id from firebase is " + dataSnapshot.getKey());
+                }
 
 
             }
@@ -96,11 +93,13 @@ public class EventLab extends Activity{
             @Override
             public void onCancelled(DatabaseError databaseError) {}
         });
-        if (mEvents.size()==0) {
-            Event sample = generateSampleEvent();
-            mEvents.add(sample);
-        }
 
+
+        Collections.sort(mEvents, new Comparator<Event>() {
+            public int compare(Event o1, Event o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
 
         return mEvents;
     }
@@ -113,5 +112,25 @@ public class EventLab extends Activity{
         }
 
         return null;
+    }
+
+    public List<Event> getEventsFiltered(Event hasFilteringSet) {
+        List<Event> mFilteredEvents = new ArrayList<Event>();
+
+        for (Event e : mEvents) {
+            if (hasFilteringSet.getDifficulty() != null) {
+                if (hasFilteringSet.getDifficulty() == e.getDifficulty()) {
+                    mFilteredEvents.add(e);
+                }
+            } else {
+                mFilteredEvents.add(e);
+            }
+        }
+        Collections.sort(mFilteredEvents, new Comparator<Event>() {
+            public int compare(Event o1, Event o2) {
+                return o1.getDate().compareTo(o2.getDate());
+            }
+        });
+        return mFilteredEvents;
     }
 }

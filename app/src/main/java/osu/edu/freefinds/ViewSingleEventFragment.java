@@ -69,8 +69,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
             value = b.getInt("key");
         }
 
-        //TODO: this is for testing--remove this
-        key = "-Ky35-pkgBWpj7uHcUdi";
+        key = getActivity().getIntent().getStringExtra("single_event_id");
 
         DatabaseReference ref = database.child("events").child(key);
 
@@ -171,11 +170,11 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        StorageReference imageRef = storage.child("images").child(event.getImageFileName());
-        Glide.with(this /* context */)
-                .using(new FirebaseImageLoader())
-                .load(imageRef)
-                .into(imageView );
+//        StorageReference imageRef = storage.child("images").child(event.getImageFileName());
+//        Glide.with(this /* context */)
+//                .using(new FirebaseImageLoader())
+//                .load(imageRef)
+//                .into(imageView );
 
         eventTitleField.setText(title);
         eventDescriptionField.setText(description);
