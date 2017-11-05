@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.facebook.AccessToken;
+import com.facebook.Profile;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -37,6 +38,7 @@ import java.util.Random;
 
 import static android.app.Activity.RESULT_OK;
 import static com.facebook.FacebookSdk.getApplicationContext;
+import static com.facebook.Profile.getCurrentProfile;
 import static java.lang.Integer.parseInt;
 
 /**
@@ -135,11 +137,15 @@ public class CreateEventFragment extends Fragment {
                     String location = locationField.getText().toString();
                     int difficulty = difficultyVal.getProgress();
 
+                    Profile currentUser = getCurrentProfile();
+                    String userName = currentUser.getFirstName();
+
                     myEvent.setTitle(titleText);
                     myEvent.setDescription(descriptionText);
                     myEvent.setOsuLocation(location);
                     myEvent.setDifficulty(difficulty);
                     myEvent.setImageFileName(imageFileName);
+                    myEvent.setUser(userName);
 
                     DatabaseReference events = database.child("events");
                     DatabaseReference newEvent = events.push();
