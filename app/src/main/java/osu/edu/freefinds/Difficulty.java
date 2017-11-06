@@ -9,7 +9,7 @@ import java.lang.reflect.Array;
  */
 
 public class Difficulty extends SortingType {
-    public static String TITLE = "Difficulty";
+    private static String SORTING_TYPE_NAME = "Difficulty";
     public String mDescription;
     public String mTitle;
     public static String[] mTitles = new String[] {
@@ -57,6 +57,11 @@ public class Difficulty extends SortingType {
                 break;
 
         }
+    }
+
+    @Override
+    public String getSortingTypeName() {
+        return SORTING_TYPE_NAME;
     }
 
 

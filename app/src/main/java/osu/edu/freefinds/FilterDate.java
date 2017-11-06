@@ -1,26 +1,26 @@
 package osu.edu.freefinds;
 
 
-        import java.util.Calendar;
-        import java.util.Date;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Created by stephaniesmacbook on 10/26/17.
  */
 
-public class Upvote extends SortingType {
-    private static String SORTING_TYPE_NAME = "Upvotes";
-    public String mDescription;
+public class FilterDate extends SortingType {
+    private static String SORTING_TYPE_NAME = "Date";
     public String mTitle;
     public static String[] mTitles = new String[] {
-            "At least one upvote",
-            "At least five upvotes",
-            "More than ten upvotes"
+            "This week",
+            "Next week",
+            "Two weeks from now",
+            "Three weeks from now"
     };
 
     public static int sortingCategoriesLength = mTitles.length;
 
-    public Upvote(){
+    public FilterDate(){
     }
 
     @Override
@@ -28,23 +28,30 @@ public class Upvote extends SortingType {
         return mTitles;
     }
 
-    private void filterUpvote(int level, EventListFragment e) {
+    private void filterDate(int noOfDays, EventListFragment e) {
         Event filterEvent = new Event();
-        filterEvent.setUpvote(level);
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(new java.util.Date());
+        calendar.add(Calendar.DAY_OF_YEAR, noOfDays);
+        Date date = calendar.getTime();
+        filterEvent.setDate(date);
         e.filterEvents(filterEvent);
     }
 
     @Override
     public void handleClick(String itemClicked, EventListFragment e) {
         switch (itemClicked) {
-            case "At least one upvote" :
-                filterUpvote(0, e);
+            case "This week" :
+                filterDate(0, e);
                 break;
-            case "At least five upvotes" :
-                filterUpvote(5, e);
+            case "Next week" :
+                filterDate(7, e);
                 break;
-            case "More than ten upvotes" :
-                filterUpvote(10, e);
+            case "Two weeks from now" :
+                filterDate(14, e);
+                break;
+            case "Three weeks from now" :
+                filterDate(21, e);
                 break;
 
         }

@@ -36,7 +36,7 @@
             app:srcCompat="@drawable/ic_difficulty" />
 
         <android.support.design.widget.FloatingActionButton
-            android:id="@+id/fab_check"
+            android:id="@+id/fab_upvote"
             android:layout_width="56dp"
             android:layout_height="56dp"
             android:layout_margin="6dp"

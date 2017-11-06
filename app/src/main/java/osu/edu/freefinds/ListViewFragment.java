@@ -61,20 +61,31 @@ public class ListViewFragment extends Fragment implements View.OnClickListener  
         FloatingActionButton difficulty = (FloatingActionButton) v.findViewById(R.id.fab_difficutly);
         difficulty.setOnClickListener(this);
 
+        FloatingActionButton upvote = (FloatingActionButton) v.findViewById(R.id.fab_upvote);
+        upvote.setOnClickListener(this);
+
+        FloatingActionButton calendar = (FloatingActionButton) v.findViewById(R.id.fab_calendar);
+        calendar.setOnClickListener(this);
+
         return v;
     }
 
 
     public void onClick(View v) {
+        Log.d(TAG, "pressed");
         switch (v.getId()) {
             case R.id.fab_difficutly:
                 Log.d(TAG, "difficulty button pressed");
                 initiatePopupWindow(v, new Difficulty());
                 break;
-            case R.id.fab_check:
+            case R.id.fab_upvote:
                 Log.d(TAG, "upvote button pressed");
-                // initiatePopupWindow(v, new Upvote());
-
+                initiatePopupWindow(v, new Upvote());
+                break;
+            case R.id.fab_calendar:
+                Log.d(TAG, "calendar button pressed");
+                initiatePopupWindow(v, new FilterDate());
+                break;
         }
     }
 
@@ -95,13 +106,12 @@ public class ListViewFragment extends Fragment implements View.OnClickListener  
 
             mSortLevelListView = (ListView) layout.findViewById(R.id.sort_level_list_view);
             TextView t = (TextView) layout.findViewById(R.id.Title);
-            t.setText("Sort by Difficulty");
+            t.setText("Sort by "+ sType.getSortingTypeName());
 
             // Adapter
             ArrayAdapter<String> adapter = new ArrayAdapter<String>(this.getContext(),
                     R.layout.list_item_sort_level, R.id.sort_level, sType.getTitles());
 
-            Log.d(TAG, "list view " + mSortLevelListView);
 
 
             // Sets the adapter for the ListView

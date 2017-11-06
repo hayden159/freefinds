@@ -80,9 +80,6 @@ public class EventListFragment extends Fragment {
         @Override
         public void onClick(View view) {
             // inflate a single activity view and pass in mEvent
-            Toast.makeText(getActivity(),
-                    mEvent.getTitle() + " clicked!", Toast.LENGTH_SHORT)
-                    .show();
             Intent intent = new Intent(getActivity().getBaseContext(), ViewSingleEventActivity.class);
             intent.putExtra("single_event_id", mEvent.getId());
             startActivity(intent);
@@ -99,7 +96,6 @@ public class EventListFragment extends Fragment {
             Date date = event.getDate(); // your date
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
-            int year = cal.get(Calendar.YEAR);
             int month = cal.get(Calendar.MONTH);
             int day = cal.get(Calendar.DAY_OF_MONTH);
             String fDate = formattedDate(month, day);

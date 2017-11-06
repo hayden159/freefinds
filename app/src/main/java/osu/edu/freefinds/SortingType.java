@@ -7,9 +7,10 @@ import android.app.FragmentManager;
  */
 
 public abstract class SortingType {
-    public static String TITLE;
+    private  String SORTING_TYPE_NAME;
     public int sortingCategoriesLength;
 
     public abstract String[] getTitles();
     public abstract void handleClick(String itemClicked, EventListFragment e);
+    public abstract String getSortingTypeName();
 }

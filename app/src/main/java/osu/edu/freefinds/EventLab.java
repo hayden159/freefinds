@@ -82,7 +82,19 @@ public class EventLab extends Activity{
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {}
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
+                Event e = dataSnapshot.getValue(Event.class);
+                int toRemove = 0;
+                int i = 0;
+                for (Event existingE : mEvents) {
+                    i++;
+                    if (existingE.getId().equals(e.getId())) {
+                        toRemove = i;
+                    }
+                }
+                mEvents.remove(toRemove);
+
+            }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {}
@@ -118,11 +130,32 @@ public class EventLab extends Activity{
         List<Event> mFilteredEvents = new ArrayList<Event>();
 
         for (Event e : mEvents) {
+            boolean filteredOut = false;
             if (hasFilteringSet.getDifficulty() != null) {
                 if (hasFilteringSet.getDifficulty() == e.getDifficulty()) {
-                    mFilteredEvents.add(e);
+                    filteredOut = true;
                 }
-            } else {
+            }
+            if (!filteredOut && hasFilteringSet.getUpvote() != null) {
+                Log.d(TAG, "e upvote "+ e.getUpvote() + "filtered upvote "+hasFilteringSet.getUpvote());
+                if (hasFilteringSet.getUpvote() >= e.getUpvote()) {
+                    filteredOut = true;
+                }
+            }
+
+            if (!filteredOut && hasFilteringSet.getDate() != null) {
+                Date startDate = hasFilteringSet.getDate();
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(startDate);
+                calendar.add(Calendar.DAY_OF_YEAR, 7);
+                Date endDate = calendar.getTime();
+
+                if(e.getDate().after(endDate) || e.getDate().before(startDate)) {
+                    filteredOut = true;
+                }
+            }
+
+            if (!filteredOut) {
                 mFilteredEvents.add(e);
             }
         }

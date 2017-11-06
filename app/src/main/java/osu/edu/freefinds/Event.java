@@ -17,7 +17,7 @@ public class Event {
     private Date mDate;
     private int mEndHour;
     private int mEndMinute;
-    private int mUpvote;
+    private Integer mUpvote;
     private int mDownvote;
     private String mOsuLocation;
     private Integer mDifficulty;
@@ -129,11 +129,11 @@ public class Event {
         this.mTitle = mTitle;
     }
 
-    public int getUpvote() {
+    public Integer getUpvote() {
         return mUpvote;
     }
 
-    public void setUpvote(int mUpvote) {
+    public void setUpvote(Integer mUpvote) {
         this.mUpvote = mUpvote;
     }
 
