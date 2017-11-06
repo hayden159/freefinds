@@ -27,8 +27,6 @@ public class Event {
 
     public Event() {
         //mId is from Firebase - can only retrieve after object is stored
-        this.mUpvote = 0;
-        this.mDownvote = 0;
         this.mComments = new ArrayList<>();
     }
 

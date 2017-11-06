@@ -93,7 +93,7 @@ public class EventListFragment extends Fragment {
             mUpvoteView.setText(String.valueOf(mEvent.getUpvote()));
 
             // format time
-            Date date = event.getDate(); // your date
+            Date date = event.getDate();
             Calendar cal = Calendar.getInstance();
             cal.setTime(date);
             int month = cal.get(Calendar.MONTH);
@@ -171,40 +171,40 @@ public class EventListFragment extends Fragment {
     private String formattedDate(int monthNum, int dayOfMonthNum){
         String month = "";
         switch (monthNum) {
-            case 1:
+            case 0:
                 month = "January";
                 break;
-            case 2:
+            case 1:
                 month = "February";
                 break;
-            case 3:
+            case 2:
                 month = "March";
                 break;
-            case 4:
+            case 3:
                 month = "April";
                 break;
-            case 5:
+            case 4:
                 month = "May";
                 break;
-            case 6:
+            case 5:
                 month = "June";
                 break;
-            case 7:
+            case 6:
                 month = "July";
                 break;
-            case 8:
+            case 7:
                 month = "August";
                 break;
-            case 9:
+            case 8:
                 month = "September";
                 break;
-            case 10:
+            case 9:
                 month = "October";
                 break;
-            case 11:
+            case 10:
                 month = "November";
                 break;
-            case 12:
+            case 11:
                 month = "December";
                 break;
         }

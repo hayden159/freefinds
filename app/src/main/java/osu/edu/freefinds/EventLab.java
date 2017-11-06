@@ -65,6 +65,7 @@ public class EventLab extends Activity{
                 Event e = dataSnapshot.getValue(Event.class);
                 e.setId(dataSnapshot.getKey());
                 boolean found = false;
+
                 for (Event existingE : mEvents) {
                     if (existingE.getId().equals(e.getId())) {
                         found = true;
@@ -132,12 +133,11 @@ public class EventLab extends Activity{
         for (Event e : mEvents) {
             boolean filteredOut = false;
             if (hasFilteringSet.getDifficulty() != null) {
-                if (hasFilteringSet.getDifficulty() == e.getDifficulty()) {
+                if (hasFilteringSet.getDifficulty() != e.getDifficulty()) {
                     filteredOut = true;
                 }
             }
             if (!filteredOut && hasFilteringSet.getUpvote() != null) {
-                Log.d(TAG, "e upvote "+ e.getUpvote() + "filtered upvote "+hasFilteringSet.getUpvote());
                 if (hasFilteringSet.getUpvote() >= e.getUpvote()) {
                     filteredOut = true;
                 }
