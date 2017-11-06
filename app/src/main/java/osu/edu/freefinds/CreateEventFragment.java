@@ -149,6 +149,8 @@ public class CreateEventFragment extends Fragment {
                     myEvent.setDifficulty(difficulty);
                     myEvent.setImageFileName(imageFileName);
                     myEvent.setUser(userName);
+                    myEvent.setUpvote(0);
+                    myEvent.setDownvote(0);
 
                     DatabaseReference events = database.child("events");
                     DatabaseReference newEvent = events.push();
