@@ -1,6 +1,7 @@
 package osu.edu.freefinds;
 
 import android.content.Context;
+import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -51,11 +52,13 @@ public class CommentLab {
         mComments = new ArrayList<Comment>();
         mRootRef = FirebaseDatabase.getInstance().getReference();
         mCommentsRef = mRootRef.child("events").child(key).child("comments");
+        Log.d(TAG, "mCommentsRef: " + mCommentsRef.toString());
 
         mCommentsRef.addChildEventListener(new ChildEventListener() {
             @Override
             public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
                 Comment e = dataSnapshot.getValue(Comment.class);
+                Log.d(TAG, "Comment found: " + e.toString());
                 e.setId(dataSnapshot.getKey());
                 mComments.add(e);
             }
