@@ -173,7 +173,7 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         int month = cal.get(Calendar.MONTH);
         int day = cal.get(Calendar.DAY_OF_MONTH);
 
-        if(event.getImageFileName() != null) {
+        if(event.getImageFileName() != null && event.getImageFileName().length()>0) {
             StorageReference imageRef = storage.child("images").child(event.getImageFileName());
             Glide.with(this /* context */)
                     .using(new FirebaseImageLoader())
