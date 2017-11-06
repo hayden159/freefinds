@@ -66,6 +66,9 @@ public class CreateEventFragment extends Fragment {
     private static final int REQUEST_END_TIME = 2;
     static final int REQUEST_IMAGE_CAPTURE = 3;
     private Event myEvent = new Event();
+    private boolean mStartTimeSelected = false;
+    private boolean mEndTimeSelected = false;
+    private boolean mDateSelected = false;
 
 
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
@@ -131,7 +134,7 @@ public class CreateEventFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                if(isLoggedIn()) {
+                if(isLoggedIn() && mDateSelected && mStartTimeSelected && mEndTimeSelected) {
                     String titleText = titleField.getText().toString();
                     String descriptionText = descriptionField.getText().toString();
                     String location = locationField.getText().toString();
@@ -154,9 +157,30 @@ public class CreateEventFragment extends Fragment {
 
                     //leave create event view now that the event is created
                     startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
-                }else{
+                }else if(!isLoggedIn()){
                     Context context = getApplicationContext();
                     CharSequence text = "Must be logged in to create an event.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }else if(!mDateSelected){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Must select a date for this event.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }else if(!mStartTimeSelected){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Must select a starting time for this event.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }else if(!mEndTimeSelected){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Must select an ending time for this event.";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
@@ -213,17 +237,20 @@ public class CreateEventFragment extends Fragment {
 
         if (requestCode == REQUEST_DATE && resultCode == RESULT_OK) {
             Date date = (Date) data.getSerializableExtra(DatePickerFragment.EXTRA_DATE);
+            mDateSelected = true;
             myEvent.setDate(date);
         }
 
         if (requestCode == REQUEST_START_TIME && resultCode == RESULT_OK) {
             Time time = (Time) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            mStartTimeSelected = true;
             myEvent.setHour(time.getHour());
             myEvent.setMinute(time.getMinute());
         }
 
         if (requestCode == REQUEST_END_TIME && resultCode == RESULT_OK) {
             Time time = (Time) data.getSerializableExtra(TimePickerFragment.EXTRA_TIME);
+            mEndTimeSelected = true;
             myEvent.setEndHour(time.getHour());
             myEvent.setEndMinute(time.getMinute());
         }
