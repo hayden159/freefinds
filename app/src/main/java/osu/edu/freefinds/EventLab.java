@@ -83,19 +83,7 @@ public class EventLab extends Activity{
             }
 
             @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                Event e = dataSnapshot.getValue(Event.class);
-                int toRemove = 0;
-                int i = 0;
-                for (Event existingE : mEvents) {
-                    i++;
-                    if (existingE.getId().equals(e.getId())) {
-                        toRemove = i;
-                    }
-                }
-                mEvents.remove(toRemove);
-
-            }
+            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) { }
 
             @Override
             public void onChildRemoved(DataSnapshot dataSnapshot) {}
