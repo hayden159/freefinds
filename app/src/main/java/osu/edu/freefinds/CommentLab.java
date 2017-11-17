@@ -33,9 +33,7 @@ public class CommentLab {
 
     public static CommentLab get(Context context, String keyVal) {
         key = keyVal;
-        if (sCommentLab == null) {
-            sCommentLab = new CommentLab(context);
-        }
+        sCommentLab = new CommentLab(context);
 
         return sCommentLab;
     }
