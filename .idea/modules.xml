@@ -3,9 +3,9 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://C:\Users\Liz\Documents\freefindsproj\app\app.iml" filepath="C:\Users\Liz\Documents\freefindsproj\app\app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/freefinds.iml" filepath="$PROJECT_DIR$/freefinds.iml" />
       <module fileurl="file://C:\Users\Liz\Documents\freefindsproj\freefinds.iml" filepath="C:\Users\Liz\Documents\freefindsproj\freefinds.iml" />
-      <module fileurl="file://$PROJECT_DIR$/freefindsproj.iml" filepath="$PROJECT_DIR$/freefindsproj.iml" />
+      <module fileurl="file://C:\Users\Liz\Documents\freefinds\freefindsproj.iml" filepath="C:\Users\Liz\Documents\freefinds\freefindsproj.iml" />
     </modules>
   </component>
 </project>

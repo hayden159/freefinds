@@ -1,6 +1,9 @@
 package osu.edu.freefinds;
 
 import android.app.Fragment;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextClock;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.storage.images.FirebaseImageLoader;
@@ -30,6 +34,8 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.TimeZone;
+
+import static com.facebook.FacebookSdk.getApplicationContext;
 
 
 /**
@@ -130,28 +136,41 @@ public class ViewSingleEventFragment extends android.support.v4.app.Fragment {
         commentButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view) {
-                String commentText = addComment.getText().toString();
-                Comment newComment = new Comment();
-                newComment.setContent(commentText);
+                ConnectivityManager connectivityManager
+                        = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                Boolean internetConnected = (activeNetworkInfo != null);
+                if(internetConnected) {
+                    String commentText = addComment.getText().toString();
+                    Comment newComment = new Comment();
+                    newComment.setContent(commentText);
 
-                Date date = new Date();   // given date
-                Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
-                calendar.setTime(date);   // assigns calendar to given date
-                int hour = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
-                int minute = calendar.get(Calendar.MINUTE);
+                    Date date = new Date();   // given date
+                    Calendar calendar = GregorianCalendar.getInstance(); // creates a new calendar instance
+                    calendar.setTime(date);   // assigns calendar to given date
+                    int hour = calendar.get(Calendar.HOUR_OF_DAY); // gets hour in 24h format
+                    int minute = calendar.get(Calendar.MINUTE);
 
-                newComment.setHourPosted(hour);
-                newComment.setMinutePosted(minute);
+                    newComment.setHourPosted(hour);
+                    newComment.setMinutePosted(minute);
 
-                ArrayList<Comment> comments = event.getComments();
-                comments.add(newComment);
-                event.setComments(comments);
+                    ArrayList<Comment> comments = event.getComments();
+                    comments.add(newComment);
+                    event.setComments(comments);
 
-                database.child("events").child(key).child("comments").setValue(event.getComments());
+                    database.child("events").child(key).child("comments").setValue(event.getComments());
 
-                addComment.setVisibility(View.INVISIBLE);
-                commentButton.setVisibility(View.INVISIBLE);
-                commentLabel.setVisibility(View.INVISIBLE);
+                    addComment.setVisibility(View.INVISIBLE);
+                    commentButton.setVisibility(View.INVISIBLE);
+                    commentLabel.setVisibility(View.INVISIBLE);
+                }else{
+                    Context context = getApplicationContext();
+                    CharSequence text = "Device is not connected to the internet.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }
             }
         });
 
