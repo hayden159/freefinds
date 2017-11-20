@@ -91,6 +91,8 @@
             android:name=".CreateEventActivity"
             android:label="@string/title_activity_create_event"
             android:theme="@style/AppTheme"/>
+
+        <service android:name=".EventDbService" />
     </application>
 
 </manifest>
