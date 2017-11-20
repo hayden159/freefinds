@@ -1,10 +1,16 @@
 package osu.edu.freefinds;
 
 import android.app.Activity;
+import android.app.ActivityManager;
+import android.app.Service;
+import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
+import android.content.ServiceConnection;
+import android.os.IBinder;
 import android.util.Log;
 
+import java.io.Serializable;
 import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -29,14 +35,33 @@ import com.google.firebase.database.ValueEventListener;
  *
  */
 
-public class EventLab extends Activity{
+public class EventLab extends Activity {
     private static EventLab sEventLab;
 
-    DatabaseReference mRootRef,mEventsRef;
+    boolean mBounded;
+    EventDbService mdBServer;
 
     private List<Event> mEvents;
 
     public static final String TAG = "EventsLab";
+
+    ServiceConnection mConnection = new ServiceConnection() {
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+            Log.d(TAG, "Service is disconnected");
+            mBounded = false;
+            mdBServer = null;
+        }
+
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.d(TAG, "Service is connected");
+            mBounded = true;
+            EventDbService.LocalBinder mLocalBinder = (EventDbService.LocalBinder)service;
+            mdBServer = mLocalBinder.getServerInstance();
+        }
+    };
+
 
 
 
@@ -54,65 +79,32 @@ public class EventLab extends Activity{
     }
 
 
+
+    public void initializeListener(Context mContext) {
+        Intent dbIntent;
+
+        Log.d(TAG, mContext.getPackageName()+ " @ "+ EventDbService.class );
+        dbIntent = new Intent(mContext,
+                EventDbService.class);
+        mContext.startService(dbIntent);
+        mContext.bindService(dbIntent, mConnection, BIND_AUTO_CREATE);
+
+    }
+
+
+
+
     public List<Event> getEvents() {
-
-        mRootRef = FirebaseDatabase.getInstance().getReference();
-        mEventsRef = mRootRef.child("events");
-
-        mEventsRef.addChildEventListener(new ChildEventListener() {
-            @Override
-            public void onChildAdded(DataSnapshot dataSnapshot, String prevChildKey) {
-                Event e = dataSnapshot.getValue(Event.class);
-                e.setId(dataSnapshot.getKey());
-                boolean found = false;
-
-                for (Event existingE : mEvents) {
-                    if (existingE.getId().equals(e.getId())) {
-                        found = true;
-                        break;
-                    }
+        Log.d(TAG,"called getEvents");
+        if (mdBServer != null) {
+            mEvents = mdBServer.getDbEvents();
+            Collections.sort(mEvents, new Comparator<Event>() {
+                public int compare(Event o1, Event o2) {
+                    return o1.getDate().compareTo(o2.getDate());
                 }
+            });
+        }
 
-                if(!found) {
-                    mEvents.add(e);
-                    Log.d(TAG, "Adding child " + dataSnapshot.child("title").getValue());
-                    Log.d(TAG, "id from firebase is " + dataSnapshot.getKey());
-                }
-
-
-            }
-
-            @Override
-            public void onChildChanged(DataSnapshot dataSnapshot, String prevChildKey) {
-                Event e = dataSnapshot.getValue(Event.class);
-                int toRemove = 0;
-                int i = 0;
-                for (Event existingE : mEvents) {
-                    i++;
-                    if (existingE.getId().equals(e.getId())) {
-                        toRemove = i;
-                    }
-                }
-                mEvents.remove(toRemove);
-
-            }
-
-            @Override
-            public void onChildRemoved(DataSnapshot dataSnapshot) {}
-
-            @Override
-            public void onChildMoved(DataSnapshot dataSnapshot, String prevChildKey) {}
-
-            @Override
-            public void onCancelled(DatabaseError databaseError) {}
-        });
-
-
-        Collections.sort(mEvents, new Comparator<Event>() {
-            public int compare(Event o1, Event o2) {
-                return o1.getDate().compareTo(o2.getDate());
-            }
-        });
 
         return mEvents;
     }
@@ -166,4 +158,14 @@ public class EventLab extends Activity{
         });
         return mFilteredEvents;
     }
+
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        if(mBounded) {
+            unbindService(mConnection);
+            mBounded = false;
+        }
+    };
 }

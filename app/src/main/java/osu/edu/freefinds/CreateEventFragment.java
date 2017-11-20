@@ -162,6 +162,7 @@ public class CreateEventFragment extends Fragment {
                     myEvent.setUpvote(0);
                     myEvent.setDownvote(0);
 
+
                     DatabaseReference events = database.child("events");
                     DatabaseReference newEvent = events.push();
 
@@ -169,14 +170,16 @@ public class CreateEventFragment extends Fragment {
 
                     //leave create event view now that the event is created
                     startActivity(new Intent(getActivity().getApplicationContext(), MainActivity.class));
-                }else if(!isLoggedIn()){
+                }
+                else if(!isLoggedIn()){
                     Context context = getApplicationContext();
                     CharSequence text = "Must be logged in to create an event.";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
                     toast.show();
-                }else if(!mDateSelected){
+                }
+                else if(!mDateSelected){
                     Context context = getApplicationContext();
                     CharSequence text = "Must select a date for this event.";
                     int duration = Toast.LENGTH_SHORT;

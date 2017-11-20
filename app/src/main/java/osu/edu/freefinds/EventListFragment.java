@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -32,19 +33,24 @@ public class EventListFragment extends Fragment {
     private EventAdapter mAdapter;
     private List<Event> mUiEvents;
     private View mView;
+    private EventLab mEventLab;
 
 
     public static final String TAG = "EventListFragment";
 
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+                             @Nullable Bundle savedInstanceState) {
         mView = inflater.inflate(R.layout.fragment_event_list, container, false);
 
         mEventRecyclerView = (RecyclerView) mView
                 .findViewById(R.id.event_recycler_view);
         mEventRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
+        mEventLab = EventLab.get(getActivity());
+        mEventLab.initializeListener(getContext());
+        Log.d(TAG, "saved instance state dne, created new EventLab");
 
         updateUI();
         return mView;
@@ -52,8 +58,7 @@ public class EventListFragment extends Fragment {
     }
 
     public void updateUI() {
-          EventLab eventLab = EventLab.get(getActivity());
-          mUiEvents = eventLab.getEvents();
+          mUiEvents = mEventLab.getEvents();
           mAdapter = new EventAdapter(mUiEvents);
           mEventRecyclerView.setAdapter(mAdapter);
     }
