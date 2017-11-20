@@ -6,6 +6,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
@@ -134,7 +136,11 @@ public class CreateEventFragment extends Fragment {
             @RequiresApi(api = Build.VERSION_CODES.M)
             @Override
             public void onClick(View view) {
-                if(isLoggedIn() && mDateSelected && mStartTimeSelected && mEndTimeSelected) {
+                ConnectivityManager connectivityManager
+                        = (ConnectivityManager) getActivity().getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+                Boolean internetConnected = (activeNetworkInfo != null);
+                if(isLoggedIn() && mDateSelected && mStartTimeSelected && mEndTimeSelected && internetConnected) {
                     String titleText = titleField.getText().toString();
                     String descriptionText = descriptionField.getText().toString();
                     String location = locationField.getText().toString();
@@ -186,6 +192,13 @@ public class CreateEventFragment extends Fragment {
                 }else if(!mEndTimeSelected){
                     Context context = getApplicationContext();
                     CharSequence text = "Must select an ending time for this event.";
+                    int duration = Toast.LENGTH_SHORT;
+
+                    Toast toast = Toast.makeText(context, text, duration);
+                    toast.show();
+                }else if(!internetConnected){
+                    Context context = getApplicationContext();
+                    CharSequence text = "Device is not connected to the internet.";
                     int duration = Toast.LENGTH_SHORT;
 
                     Toast toast = Toast.makeText(context, text, duration);
