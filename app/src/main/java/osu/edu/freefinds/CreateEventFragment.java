@@ -76,6 +76,10 @@ public class CreateEventFragment extends Fragment {
     private DatabaseReference database = FirebaseDatabase.getInstance().getReference();
     private FirebaseStorage storage = FirebaseStorage.getInstance();
 
+    public boolean isDateSelected(){
+        return mDateSelected;
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
