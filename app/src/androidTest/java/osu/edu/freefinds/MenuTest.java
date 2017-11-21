@@ -1,5 +1,6 @@
 package osu.edu.freefinds;
 
+import android.app.Instrumentation;
 import android.content.Context;
 import android.support.design.widget.FloatingActionButton;
 import android.support.test.InstrumentationRegistry;
@@ -10,7 +11,6 @@ import android.test.ActivityInstrumentationTestCase2;
 
 import org.junit.Test;
 
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,7 +20,7 @@ import android.widget.Button;
 
 public class MenuTest extends ActivityInstrumentationTestCase2<MenuActivity> {
 private MenuActivity mMenuActivity;
-private android.app.Fragment mMenuFragment;
+private MenuFragment mMenuFragment;
 
 public final String TAG = getClass().getSimpleName();
 
@@ -34,6 +34,12 @@ protected void setUp() throws Exception {
         super.setUp();
 
     mMenuActivity = getActivity();
+    mMenuFragment = new MenuFragment();
+    mMenuActivity.getSupportFragmentManager()
+            .beginTransaction()
+            .add(R.id.fragment_container, mMenuFragment, null)
+            .commit();
+
 
 
 
@@ -44,11 +50,28 @@ protected void setUp() throws Exception {
         }
 
 @Test
-public void testActivityCreated() {
+public void testPreconditions() {
         assertNotNull(mMenuActivity);
+        assertNotNull(mMenuFragment);
+        }
+
+@UiThreadTest
+public void testEventListClick () {
+final Button eventList = (Button) mMenuActivity.findViewById(R.id.button2);
+        Instrumentation.ActivityMonitor activityMonitor = getInstrumentation()
+            .addMonitor(MainActivity.class.getName(), null, false);
+        mMenuActivity.runOnUiThread(new Runnable() {
+            @Override
+            public void run() {
+                    eventList.performClick();
+            }
+        });
+        MainActivity mainActivity = (MainActivity) activityMonitor.waitForActivity();
+
+        assertNotNull("Target Activity is not launched", mainActivity);
+
+
 }
-
-
 
 
     protected void tearDown() throws Exception { // cleans up
